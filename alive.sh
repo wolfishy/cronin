@@ -1,63 +1,82 @@
 #!/bin/bash
 
+# Aggressive Gitpod Keep-Alive Script with Keyboard Input
+# This script prevents Gitpod from going idle using keyboard input + multiple methods
+
 # Function to log with timestamp
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-log "Starting hybrid keep-alive script..."
-log "DISPLAY is set to: $DISPLAY"
+log "Starting aggressive keep-alive script with keyboard input..."
 
-# Wait for X11/VNC to initialize
-sleep 30
-log "Waited 30 seconds for X11/VNC to initialize"
+# Set up display for xdotool
+export DISPLAY=:0
 
-# Check if xdotool is available and working
+# Create multiple keep-alive files
+KEEPALIVE_FILE="/tmp/gitpod-keepalive"
+TERMINAL_ACTIVITY="/tmp/terminal-activity"
+PROCESS_ACTIVITY="/tmp/process-activity"
+
+# Check if xdotool is available
 XDOTOOL_AVAILABLE=false
 if command -v xdotool &> /dev/null; then
-    log "xdotool is installed"
-    # Test xdotool with XFCE window names or root window
-    if timeout 5 xdotool search --name "xfce4-panel|Desktop|wrapper-2.0" key space 2>&1 || timeout 5 xdotool key --window 0 space 2>&1; then
-        XDOTOOL_AVAILABLE=true
-        log "xdotool is available and working"
-    else
-        log "xdotool test failed, will retry"
-    fi
+    XDOTOOL_AVAILABLE=true
+    log "xdotool is available for keyboard input"
 else
-    log "xdotool not found, using fallback methods only"
+    log "xdotool not available, using printf for keyboard simulation"
 fi
 
-# Create a keep-alive file
-KEEPALIVE_FILE="/tmp/gitpod-keepalive"
-
 while true; do
-    # Primary Method: xdotool (if available and working)
+    # Method 1: Real keyboard input (most important for Gitpod)
+    echo "KEEPALIVE: $(date)" | tee -a "$TERMINAL_ACTIVITY"
+    printf "\033[2J\033[H"  # Clear screen and move cursor to top
+    
+    # Method 2: Real keyboard input using xdotool or printf
     if [ "$XDOTOOL_AVAILABLE" = true ]; then
-        if xdotool search --name "xfce4-panel|Desktop|wrapper-2.0" key space 2>&1; then
-            log "Keep-alive signal sent (xdotool - space key to xfce4-panel/Desktop/wrapper-2.0)"
-        elif xdotool key --window 0 space 2>&1; then
-            log "Keep-alive signal sent (xdotool - space key to root window)"
+        # Try xdotool for real keyboard input
+        if xdotool key space 2>/dev/null; then
+            log "Real keyboard input sent (xdotool space key)"
+        elif xdotool key Return 2>/dev/null; then
+            log "Real keyboard input sent (xdotool Return key)"
         else
-            log "xdotool failed, switching to fallback methods"
-            XDOTOOL_AVAILABLE=false
+            log "xdotool failed, falling back to printf"
+            printf "\n"  # Newline (Enter key)
+            printf "\t"  # Tab key
+            printf " "   # Space key
         fi
+    else
+        # Fallback to printf keyboard simulation
+        printf "\n"  # Newline (Enter key)
+        printf "\t"  # Tab key
+        printf " "   # Space key
+        log "Keyboard simulation sent (printf)"
     fi
     
-    # Fallback Method: File activity + terminal output
-    if [ "$XDOTOOL_AVAILABLE" = false ]; then
-        echo "$(date)" > "$KEEPALIVE_FILE"
-        echo "keepalive $(date)"
-        log "Keep-alive signal sent (file activity + terminal output fallback)"
-        
-        # Try to re-enable xdotool
-        if command -v xdotool &> /dev/null; then
-            if timeout 5 xdotool search --name "xfce4-panel|Desktop|wrapper-2.0" key space &>/dev/null || timeout 5 xdotool key --window 0 space &>/dev/null; then
-                XDOTOOL_AVAILABLE=true
-                log "xdotool is now working, switching back"
-            fi
-        fi
-    fi
+    # Method 3: File system activity
+    echo "$(date)" > "$KEEPALIVE_FILE"
+    touch "/tmp/keepalive-$(date +%s)-$$" 2>/dev/null || true
     
-    # Sleep for 1 minute (60 seconds) for frequent activity
-    sleep 60
+    # Method 4: Process activity
+    echo "$$ $(date)" > "$PROCESS_ACTIVITY"
+    (sleep 1 && echo "child-$$ $(date)" >> "$PROCESS_ACTIVITY") &
+    
+    # Method 5: System activity
+    ps aux | head -5 >/dev/null 2>&1
+    date >/dev/null 2>&1
+    
+    # Method 6: Memory activity
+    python3 -c "import time; time.sleep(0.1)" 2>/dev/null || true
+    
+    # Method 7: Disk activity
+    df -h >/dev/null 2>&1
+    ls -la /tmp >/dev/null 2>&1
+    
+    # Method 8: Environment activity
+    env | wc -l >/dev/null 2>&1
+    
+    log "Keep-alive signal sent (8 methods including keyboard input)"
+    
+    # Sleep for 30 seconds - very frequent
+    sleep 30
 done

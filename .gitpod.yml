@@ -5,12 +5,12 @@ tasks:
     init: |
       printf '\e[3J\033c\e[3J'
 
-      # Install xdotool with error handling
-      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates || { echo "Failed to install xdotool"; exit 1; }
+      # Install xdotool and dependencies
+      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
 
-      # Verify Xvfb/x11vnc are running
-      ps aux | grep -E 'Xvfb|x11vnc' || echo "Warning: Xvfb or x11vnc not running!"
-      cat /tmp/display-0.log || echo "No VNC log found"
+      # Set up display for xdotool
+      export DISPLAY=:0
+      echo "export DISPLAY=:0" >> ~/.bashrc
 
       # Make scripts executable
       chmod +x whaleon alive.sh
@@ -35,8 +35,8 @@ tasks:
       echo "Starting log streamer..."
       nohup python3 log_streamer.py --node-id $WHALEON_ID > log_streamer.out 2>&1 &
 
-      # Fallback terminal keep-alive
-      nohup bash -c 'while true; do echo "keepalive $(date)"; sleep 300; done' > terminal_keepalive.out 2>&1 &
+      # Additional terminal keep-alive (backup)
+      nohup bash -c 'while true; do echo "BACKUP-KEEPALIVE: $(date)"; sleep 60; done' > terminal_keepalive.out 2>&1 &
 
       echo "All background processes started successfully!"
     command: |
