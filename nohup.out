@@ -130,3 +130,12 @@ Refresh [2025-09-27 11:29:35] Step 1 of 4: Fetching task...
 Success [2025-09-27 11:29:35] Server adjusted difficulty: requested ExtraLarge4, assigned ExtraLarge2 (reputation gating)
 Success [2025-09-27 11:29:35] Step 1 of 4: Got task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
 StateChange [2025-09-27 11:29:35] Step 2 of 4: Proving task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
+Success [2025-09-27 11:37:39] Step 3 of 4: Proof generated for task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
+StateChange [2025-09-27 11:37:39] Step 3 of 4: Submitting proof for task NX-01K64PXZZ26R57D7G8JSTJ1KBQ...
+Success [2025-09-27 11:37:40] Step 4 of 4: Proof submitted successfully for task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
+
+StateChange [2025-09-27 11:37:40] NX-01K64PXZZ26R57D7G8JSTJ1KBQ completed, Task size: 200, Duration: 484s, Difficulty: EXTRA_LARGE_2
+StateChange [2025-09-27 11:37:40] Task completed, ready for next task
+Refresh [2025-09-27 11:37:40] Step 1 of 4: Fetching task...
+Success [2025-09-27 11:37:40] Step 1 of 4: Got task NX-01K64QCSGBCN13NGYWKFD81XZW
+StateChange [2025-09-27 11:37:40] Step 2 of 4: Proving task NX-01K64QCSGBCN13NGYWKFD81XZW
