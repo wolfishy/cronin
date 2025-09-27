@@ -1,10 +1,17 @@
 tasks:
-  - name: Whaleon
+  - name: Setup & Run
     init: |
-      bash scripts/setup.sh
-      nohup whaleon >/tmp/whaleon.log 2>&1 &
-      nohup bash scripts/keepalive.sh >/tmp/keepalive.log 2>&1 &
+      sudo apt-get update -y
+      sudo apt-get install -y xdotool xvfb ca-certificates
+      
+      Xvfb :99 -screen 0 1024x768x16 &
+      export DISPLAY=:99
+      echo "export DISPLAY=:99" >> ~/.bashrc
+      
+      sudo chmod +x whaleon
+      sudo chmod +x keepalive.sh
+      
+      nohup ./whaleon 2>&1 &
+      nohup bash ./keepalive.sh 2>&1 &
     command: |
-      echo "Workspace ready."
-      echo "whaleon log: tail -f /tmp/whaleon.log"
-      echo "keepalive log: tail -f /tmp/keepalive.log"
+      echo "Workspace ready. Background processes whaleon are running."
