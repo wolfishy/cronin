@@ -4,6 +4,7 @@ Nexus Log Streamer
 Streams logs from whaleon process to WebSocket server.
 """
 
+import argparse
 import asyncio
 import json
 import logging
@@ -23,13 +24,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Import configuration and parser
-from config import (
-    WS_SERVER_URL,
-    RECONNECT_INTERVAL,
-    WHALEON_NODE_ID,
-)
-
+# Import parser
 from whaleon_parser import WhaleonLogParser
 
 # Nohup output file to monitor
@@ -38,6 +33,11 @@ NOHUP_OUTPUT_FILE = "nohup.out"
 # Global variables
 sio: Optional[socketio.AsyncClient] = None
 reconnect_task: Optional[asyncio.Task] = None
+
+# Global configuration
+WS_SERVER_URL: str = ""
+WHALEON_NODE_ID: str = ""
+RECONNECT_INTERVAL: int = 5
 
 
 class LogStreamer:
@@ -239,9 +239,34 @@ class NohupOutputMonitor:
             logger.error(f"Nohup output monitoring failed: {e}")
 
 
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="Nexus Log Streamer")
+    parser.add_argument("--vps-ip", required=True, help="VPS server IP address")
+    parser.add_argument(
+        "--vps-port", default="8080", help="VPS server port (default: 8080)"
+    )
+    parser.add_argument("--node-id", required=True, help="Whaleon node ID")
+    parser.add_argument(
+        "--reconnect-interval",
+        type=int,
+        default=5,
+        help="Reconnection interval in seconds (default: 5)",
+    )
+    return parser.parse_args()
+
+
 async def main():
     """Main function."""
-    global reconnect_task
+    global reconnect_task, WS_SERVER_URL, WHALEON_NODE_ID, RECONNECT_INTERVAL
+
+    # Parse command line arguments
+    args = parse_arguments()
+
+    # Set global configuration
+    WS_SERVER_URL = f"http://{args.vps_ip}:{args.vps_port}"
+    WHALEON_NODE_ID = args.node_id
+    RECONNECT_INTERVAL = args.reconnect_interval
 
     logger.info("Starting Nexus Log Streamer")
     logger.info(f"Socket.IO Server: {WS_SERVER_URL}")

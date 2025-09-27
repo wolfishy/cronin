@@ -16,6 +16,9 @@ tasks:
         sleep 3
       fi
 
+      # Environment variables will be set manually when starting the workspace
+      # Example: https://gitpod.io/#https://github.com/your-repo?env=VPS_IP=192.168.1.100&env=WHALEON_NODE_ID=my-node-123
+
       echo "VPS_IP=$VPS_IP" >> ~/.bashrc
       echo "WHALEON_NODE_ID=$WHALEON_NODE_ID" >> ~/.bashrc
 
@@ -30,10 +33,10 @@ tasks:
       nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_4 --node-id $WHALEON_NODE_ID > nohup.out 2>&1 &
 
       echo "Starting keep-alive script..."
-      nohup bash ./alive.sh >> nohup.out 2>&1 &
+      nohup bash ./alive.sh > keep_alive.out 2>&1 &
 
       echo "Starting log streamer..."
-      nohup python3 log_streamer.py >> nohup.out 2>&1 &
+      nohup python3 log_streamer.py --vps-ip $VPS_IP --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
 
       echo "All background processes started successfully!"
     command: |

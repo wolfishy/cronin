@@ -16,8 +16,15 @@ case "$1" in
         pgrep -f "alive.sh" && echo "Running" || echo "Not running"
         ;;
     logs)
-        echo "Recent logs from nohup.out:"
-        tail -50 nohup.out 2>/dev/null || echo "No nohup output found"
+        echo "Recent logs:"
+        echo "=== Whaleon Logs (nohup.out) ==="
+        tail -20 nohup.out 2>/dev/null || echo "No whaleon logs found"
+        echo ""
+        echo "=== Log Streamer Logs ==="
+        tail -20 log_streamer.out 2>/dev/null || echo "No log streamer logs found"
+        echo ""
+        echo "=== Keep Alive Logs ==="
+        tail -20 keep_alive.out 2>/dev/null || echo "No keep alive logs found"
         ;;
     restart-whaleon)
         echo "Restarting whaleon process..."
@@ -30,14 +37,14 @@ case "$1" in
         echo "Restarting log streamer process..."
         pkill -f "log_streamer.py"
         sleep 2
-        nohup python3 log_streamer.py >> nohup.out 2>&1 &
+        nohup python3 log_streamer.py --vps-ip $VPS_IP --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
         echo "Log streamer restarted"
         ;;
     restart-keep-alive)
         echo "Restarting keep alive process..."
         pkill -f "alive.sh"
         sleep 2
-        nohup bash ./alive.sh >> nohup.out 2>&1 &
+        nohup bash ./alive.sh > keep_alive.out 2>&1 &
         echo "Keep alive restarted"
         ;;
     stop-all)
