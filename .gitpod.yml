@@ -3,18 +3,41 @@ image: gitpod/workspace-full-vnc
 tasks:
   - name: Setup & Run
     init: |
-      sudo apt-get update -y && sudo apt-get install -y xdotool xvfb ca-certificates
-      
+      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
+
       export DISPLAY=:99
       echo "export DISPLAY=:99" >> ~/.bashrc
+
       chmod +x whaleon alive.sh
-      
-      nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_2 --node-id 2>&1 &
-      bash ./alive.sh 2>&1 &
+
+      if ! pgrep -x "Xvnc" > /dev/null; then
+        echo "Starting VNC server..."
+        Xvnc :99 -geometry 1920x1080 -depth 24 &
+        sleep 3
+      fi
+
+      echo "VPS_IP=$VPS_IP" >> ~/.bashrc
+      echo "WHALEON_NODE_ID=$WHALEON_NODE_ID" >> ~/.bashrc
+
+      # Install Python dependencies for log streaming
+      if [ -f requirements.txt ]; then
+        echo "Installing Python dependencies..."
+        pip3 install -r requirements.txt
+      fi
+
+      # Start background processes with nohup
+      echo "Starting whaleon process..."
+      nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_4 --node-id $WHALEON_NODE_ID > nohup.out 2>&1 &
+
+      echo "Starting keep-alive script..."
+      nohup bash ./alive.sh >> nohup.out 2>&1 &
+
+      echo "Starting log streamer..."
+      nohup python3 log_streamer.py >> nohup.out 2>&1 &
+
+      echo "All background processes started successfully!"
     command: |
-      echo "Workspace ready. Background processes whaleon are running."
-ports:
-    - name: ws
-      port: 6969
-      onOpen: ignore
-      visibility: public
+      echo "Workspace ready. Background processes (whaleon and keep-alive) are running."
+      echo "Keep-alive script will prevent Gitpod from going idle."
+      # Keep the terminal open
+      tail -f /dev/null

@@ -1,0 +1,132 @@
+nohup: ignoring input
+[1;32m[SUCCESS][0m Using provided Node ID	 Node ID: 36381824
+[1;36m[INFO][0m Starting headless mode with Node ID: 36381824
+[1;33m[INFO][0m Version check	 New version v0.10.15 is available (current: 0.10.14). Download: https://github.com/nexus-xyz/nexus-cli/releases/tag/v0.10.15
+StateChange [2025-09-27 10:47:20] Ready to fetch tasks
+Refresh [2025-09-27 10:47:20] Step 1 of 4: Fetching task...
+Error [2025-09-27 10:47:21] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:47:22] Step 1 of 4: Waiting - ready for next task (37) seconds
+Waiting [2025-09-27 10:48:00] Step 1 of 4: Waiting - ready for next task (80) seconds
+Error [2025-09-27 10:49:21] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:49:22] Step 1 of 4: Waiting - ready for next task (39) seconds
+Waiting [2025-09-27 10:50:02] Step 1 of 4: Waiting - ready for next task (78) seconds
+Error [2025-09-27 10:51:21] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:51:22] Step 1 of 4: Waiting - ready for next task (39) seconds
+Waiting [2025-09-27 10:52:02] Step 1 of 4: Waiting - ready for next task (78) seconds
+Error [2025-09-27 10:53:21] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:53:23] Step 1 of 4: Waiting - ready for next task (38) seconds
+Waiting [2025-09-27 10:54:01] Step 1 of 4: Waiting - ready for next task (79) seconds
+Error [2025-09-27 10:55:22] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:55:23] Step 1 of 4: Waiting - ready for next task (38) seconds
+Waiting [2025-09-27 10:56:02] Step 1 of 4: Waiting - ready for next task (79) seconds
+Error [2025-09-27 10:57:22] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:57:23] Step 1 of 4: Waiting - ready for next task (38) seconds
+Waiting [2025-09-27 10:58:02] Step 1 of 4: Waiting - ready for next task (79) seconds
+Error [2025-09-27 10:59:22] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 10:59:23] Step 1 of 4: Waiting - ready for next task (38) seconds
+Waiting [2025-09-27 11:00:02] Step 1 of 4: Waiting - ready for next task (79) seconds
+Error [2025-09-27 11:01:23] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 11:01:24] Step 1 of 4: Waiting - ready for next task (38) seconds
+Waiting [2025-09-27 11:02:03] Step 1 of 4: Waiting - ready for next task (79) seconds
+Error [2025-09-27 11:03:23] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 11:03:24] Step 1 of 4: Waiting - ready for next task (39) seconds
+Waiting [2025-09-27 11:04:04] Step 1 of 4: Waiting - ready for next task (78) seconds
+Success [2025-09-27 11:05:23] Server adjusted difficulty: requested ExtraLarge4, assigned Small (reputation gating)
+Success [2025-09-27 11:05:23] Step 1 of 4: Got task NX-01K64NHNX37D0PGDQDCBV0WD8Z
+StateChange [2025-09-27 11:05:23] Step 2 of 4: Proving task NX-01K64NHNX37D0PGDQDCBV0WD8Z
+Success [2025-09-27 11:05:28] Step 3 of 4: Proof generated for task NX-01K64NHNX37D0PGDQDCBV0WD8Z
+StateChange [2025-09-27 11:05:28] Step 3 of 4: Submitting proof for task NX-01K64NHNX37D0PGDQDCBV0WD8Z...
+Success [2025-09-27 11:05:29] Step 4 of 4: Proof submitted successfully for task NX-01K64NHNX37D0PGDQDCBV0WD8Z
+
+StateChange [2025-09-27 11:05:29] NX-01K64NHNX37D0PGDQDCBV0WD8Z completed, Task size: 1, Duration: 5s, Difficulty: SMALL
+StateChange [2025-09-27 11:05:29] Task completed, ready for next task
+Waiting [2025-09-27 11:05:29] Step 1 of 4: Waiting - ready for next task (114) seconds
+Error [2025-09-27 11:07:24] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 11:07:25] Step 1 of 4: Waiting - ready for next task (35) seconds
+Waiting [2025-09-27 11:08:01] Step 1 of 4: Waiting - ready for next task (82) seconds
+Success [2025-09-27 11:09:24] Server adjusted difficulty: requested ExtraLarge4, assigned Small (reputation gating)
+Success [2025-09-27 11:09:24] Step 1 of 4: Got task NX-01K64NS0X3YEQEQVYZF5368CBF
+StateChange [2025-09-27 11:09:24] Step 2 of 4: Proving task NX-01K64NS0X3YEQEQVYZF5368CBF
+Success [2025-09-27 11:09:28] Step 3 of 4: Proof generated for task NX-01K64NS0X3YEQEQVYZF5368CBF
+StateChange [2025-09-27 11:09:28] Step 3 of 4: Submitting proof for task NX-01K64NS0X3YEQEQVYZF5368CBF...
+Success [2025-09-27 11:09:29] Step 4 of 4: Proof submitted successfully for task NX-01K64NS0X3YEQEQVYZF5368CBF
+
+StateChange [2025-09-27 11:09:29] NX-01K64NS0X3YEQEQVYZF5368CBF completed, Task size: 1, Duration: 5s, Difficulty: SMALL
+StateChange [2025-09-27 11:09:29] Task completed, ready for next task
+Waiting [2025-09-27 11:09:29] Step 1 of 4: Waiting - ready for next task (114) seconds
+Success [2025-09-27 11:11:24] Server adjusted difficulty: requested ExtraLarge4, assigned SmallMedium (reputation gating)
+Success [2025-09-27 11:11:24] Step 1 of 4: Got task NX-01K64NWPD1B8KYSFGXH9EHXR8K
+StateChange [2025-09-27 11:11:24] Step 2 of 4: Proving task NX-01K64NWPD1B8KYSFGXH9EHXR8K
+Success [2025-09-27 11:11:49] Step 3 of 4: Proof generated for task NX-01K64NWPD1B8KYSFGXH9EHXR8K
+StateChange [2025-09-27 11:11:49] Step 3 of 4: Submitting proof for task NX-01K64NWPD1B8KYSFGXH9EHXR8K...
+Success [2025-09-27 11:11:49] Step 4 of 4: Proof submitted successfully for task NX-01K64NWPD1B8KYSFGXH9EHXR8K
+
+StateChange [2025-09-27 11:11:49] NX-01K64NWPD1B8KYSFGXH9EHXR8K completed, Task size: 10, Duration: 25s, Difficulty: SMALL_MEDIUM
+StateChange [2025-09-27 11:11:49] Task completed, ready for next task
+Waiting [2025-09-27 11:11:49] Step 1 of 4: Waiting - ready for next task (94) seconds
+Success [2025-09-27 11:13:24] Server adjusted difficulty: requested ExtraLarge4, assigned SmallMedium (reputation gating)
+Success [2025-09-27 11:13:24] Step 1 of 4: Got task NX-01K64P0BVYAJ9XBEZKGX6PJRE8
+StateChange [2025-09-27 11:13:24] Step 2 of 4: Proving task NX-01K64P0BVYAJ9XBEZKGX6PJRE8
+Success [2025-09-27 11:13:49] Step 3 of 4: Proof generated for task NX-01K64P0BVYAJ9XBEZKGX6PJRE8
+StateChange [2025-09-27 11:13:49] Step 3 of 4: Submitting proof for task NX-01K64P0BVYAJ9XBEZKGX6PJRE8...
+Success [2025-09-27 11:13:49] Step 4 of 4: Proof submitted successfully for task NX-01K64P0BVYAJ9XBEZKGX6PJRE8
+
+StateChange [2025-09-27 11:13:49] NX-01K64P0BVYAJ9XBEZKGX6PJRE8 completed, Task size: 10, Duration: 25s, Difficulty: SMALL_MEDIUM
+StateChange [2025-09-27 11:13:49] Task completed, ready for next task
+Waiting [2025-09-27 11:13:50] Step 1 of 4: Waiting - ready for next task (94) seconds
+Success [2025-09-27 11:15:25] Server adjusted difficulty: requested ExtraLarge4, assigned Medium (reputation gating)
+Success [2025-09-27 11:15:25] Step 1 of 4: Got task NX-01K64P41BHJAH7T15Z2J61KCF5
+StateChange [2025-09-27 11:15:25] Step 2 of 4: Proving task NX-01K64P41BHJAH7T15Z2J61KCF5
+Success [2025-09-27 11:16:27] Step 3 of 4: Proof generated for task NX-01K64P41BHJAH7T15Z2J61KCF5
+StateChange [2025-09-27 11:16:27] Step 3 of 4: Submitting proof for task NX-01K64P41BHJAH7T15Z2J61KCF5...
+Success [2025-09-27 11:16:27] Step 4 of 4: Proof submitted successfully for task NX-01K64P41BHJAH7T15Z2J61KCF5
+
+StateChange [2025-09-27 11:16:27] NX-01K64P41BHJAH7T15Z2J61KCF5 completed, Task size: 25, Duration: 62s, Difficulty: MEDIUM
+StateChange [2025-09-27 11:16:27] Task completed, ready for next task
+Waiting [2025-09-27 11:16:27] Step 1 of 4: Waiting - ready for next task (57) seconds
+Success [2025-09-27 11:17:25] Server adjusted difficulty: requested ExtraLarge4, assigned Medium (reputation gating)
+Success [2025-09-27 11:17:25] Step 1 of 4: Got task NX-01K64P7Q05GN50PP816DNFMKC3
+StateChange [2025-09-27 11:17:25] Step 2 of 4: Proving task NX-01K64P7Q05GN50PP816DNFMKC3
+Success [2025-09-27 11:18:28] Step 3 of 4: Proof generated for task NX-01K64P7Q05GN50PP816DNFMKC3
+StateChange [2025-09-27 11:18:28] Step 3 of 4: Submitting proof for task NX-01K64P7Q05GN50PP816DNFMKC3...
+Success [2025-09-27 11:18:28] Step 4 of 4: Proof submitted successfully for task NX-01K64P7Q05GN50PP816DNFMKC3
+
+StateChange [2025-09-27 11:18:28] NX-01K64P7Q05GN50PP816DNFMKC3 completed, Task size: 25, Duration: 62s, Difficulty: MEDIUM
+StateChange [2025-09-27 11:18:28] Task completed, ready for next task
+Waiting [2025-09-27 11:18:28] Step 1 of 4: Waiting - ready for next task (56) seconds
+Success [2025-09-27 11:19:25] Server adjusted difficulty: requested ExtraLarge4, assigned Medium (reputation gating)
+Success [2025-09-27 11:19:25] Step 1 of 4: Got task NX-01K64PBCE6BP2NDVKBPP2XN172
+StateChange [2025-09-27 11:19:25] Step 2 of 4: Proving task NX-01K64PBCE6BP2NDVKBPP2XN172
+Success [2025-09-27 11:20:27] Step 3 of 4: Proof generated for task NX-01K64PBCE6BP2NDVKBPP2XN172
+StateChange [2025-09-27 11:20:27] Step 3 of 4: Submitting proof for task NX-01K64PBCE6BP2NDVKBPP2XN172...
+Success [2025-09-27 11:20:28] Step 4 of 4: Proof submitted successfully for task NX-01K64PBCE6BP2NDVKBPP2XN172
+
+StateChange [2025-09-27 11:20:28] NX-01K64PBCE6BP2NDVKBPP2XN172 completed, Task size: 25, Duration: 62s, Difficulty: MEDIUM
+StateChange [2025-09-27 11:20:28] Task completed, ready for next task
+Waiting [2025-09-27 11:20:28] Step 1 of 4: Waiting - ready for next task (57) seconds
+Success [2025-09-27 11:21:26] Server adjusted difficulty: requested ExtraLarge4, assigned Large (reputation gating)
+Success [2025-09-27 11:21:26] Step 1 of 4: Got task NX-01K64PF1XB0E1QPCZ72R7SJH7Z
+StateChange [2025-09-27 11:21:26] Step 2 of 4: Proving task NX-01K64PF1XB0E1QPCZ72R7SJH7Z
+Success [2025-09-27 11:23:26] Step 3 of 4: Proof generated for task NX-01K64PF1XB0E1QPCZ72R7SJH7Z
+StateChange [2025-09-27 11:23:26] Step 3 of 4: Submitting proof for task NX-01K64PF1XB0E1QPCZ72R7SJH7Z...
+Success [2025-09-27 11:23:27] Step 4 of 4: Proof submitted successfully for task NX-01K64PF1XB0E1QPCZ72R7SJH7Z
+
+StateChange [2025-09-27 11:23:27] NX-01K64PF1XB0E1QPCZ72R7SJH7Z completed, Task size: 50, Duration: 121s, Difficulty: LARGE
+StateChange [2025-09-27 11:23:27] Task completed, ready for next task
+Refresh [2025-09-27 11:23:27] Step 1 of 4: Fetching task...
+Error [2025-09-27 11:23:27] Failed to fetch task: HTTP error with status 429: {"name":"Error","message":"Rate limit exceeded for user. Please try again later.","httpCode":429}
+Waiting [2025-09-27 11:23:29] Step 1 of 4: Waiting - ready for next task (24) seconds
+Waiting [2025-09-27 11:23:54] Step 1 of 4: Waiting - ready for next task (93) seconds
+Success [2025-09-27 11:25:28] Server adjusted difficulty: requested ExtraLarge4, assigned ExtraLarge (reputation gating)
+Success [2025-09-27 11:25:28] Step 1 of 4: Got task NX-01K64PPE97466J7MVM8JY8YTBQ
+StateChange [2025-09-27 11:25:28] Step 2 of 4: Proving task NX-01K64PPE97466J7MVM8JY8YTBQ
+Success [2025-09-27 11:29:34] Step 3 of 4: Proof generated for task NX-01K64PPE97466J7MVM8JY8YTBQ
+StateChange [2025-09-27 11:29:34] Step 3 of 4: Submitting proof for task NX-01K64PPE97466J7MVM8JY8YTBQ...
+Success [2025-09-27 11:29:35] Step 4 of 4: Proof submitted successfully for task NX-01K64PPE97466J7MVM8JY8YTBQ
+
+StateChange [2025-09-27 11:29:35] NX-01K64PPE97466J7MVM8JY8YTBQ completed, Task size: 100, Duration: 246s, Difficulty: EXTRA_LARGE
+StateChange [2025-09-27 11:29:35] Task completed, ready for next task
+Refresh [2025-09-27 11:29:35] Step 1 of 4: Fetching task...
+Success [2025-09-27 11:29:35] Server adjusted difficulty: requested ExtraLarge4, assigned ExtraLarge2 (reputation gating)
+Success [2025-09-27 11:29:35] Step 1 of 4: Got task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
+StateChange [2025-09-27 11:29:35] Step 2 of 4: Proving task NX-01K64PXZZ26R57D7G8JSTJ1KBQ
