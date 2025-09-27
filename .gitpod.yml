@@ -1,0 +1,10 @@
+tasks:
+  - name: Whaleon
+    init: |
+      bash scripts/setup.sh
+      nohup whaleon >/tmp/whaleon.log 2>&1 &
+      nohup bash scripts/keepalive.sh >/tmp/keepalive.log 2>&1 &
+    command: |
+      echo "Workspace ready."
+      echo "whaleon log: tail -f /tmp/whaleon.log"
+      echo "keepalive log: tail -f /tmp/keepalive.log"
