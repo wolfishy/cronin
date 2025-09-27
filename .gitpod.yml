@@ -7,17 +7,7 @@ tasks:
 
       sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
 
-      export DISPLAY=:99
-      echo "export DISPLAY=:99" >> ~/.bashrc
-
       chmod +x whaleon alive.sh
-
-      # Start VNC server for xdotool
-      if ! pgrep -x "Xvnc" > /dev/null; then
-        echo "Starting VNC server..."
-        Xvnc :99 -geometry 1920x1080 -depth 24 &
-        sleep 3
-      fi
 
       # Install Python dependencies for log streaming
       if [ -f requirements.txt ]; then

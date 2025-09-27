@@ -15,8 +15,8 @@ log "Starting hybrid keep-alive script..."
 # Check if xdotool is available and working
 XDOTOOL_AVAILABLE=false
 if command -v xdotool &> /dev/null; then
-    # Test if xdotool can work with the display
-    if timeout 5 xdotool getactivewindow &>/dev/null; then
+    # Test if xdotool can work with the display (skip getactivewindow test)
+    if timeout 5 xdotool key space &>/dev/null; then
         XDOTOOL_AVAILABLE=true
         log "xdotool is available and working"
     else
@@ -47,7 +47,7 @@ while true; do
         
         # Try to re-enable xdotool
         if command -v xdotool &> /dev/null; then
-            if timeout 5 xdotool getactivewindow &>/dev/null; then
+            if timeout 5 xdotool key space &>/dev/null; then
                 XDOTOOL_AVAILABLE=true
                 log "xdotool is now working, switching back"
             fi
