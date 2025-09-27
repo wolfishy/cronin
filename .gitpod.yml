@@ -3,6 +3,8 @@ image: gitpod/workspace-full-vnc
 tasks:
   - name: Setup & Run
     init: |
+      printf '\e[3J\033c\e[3J'
+
       sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
 
       export DISPLAY=:99
@@ -16,10 +18,6 @@ tasks:
         sleep 3
       fi
 
-      # Environment variables will be set manually when starting the workspace
-      # Example: https://gitpod.io/#https://github.com/your-repo?env=WHALEON_NODE_ID=my-node-123
-      echo "WHALEON_NODE_ID=$WHALEON_NODE_ID" >> ~/.bashrc
-
       # Install Python dependencies for log streaming
       if [ -f requirements.txt ]; then
         echo "Installing Python dependencies..."
@@ -28,13 +26,13 @@ tasks:
 
       # Start background processes with nohup
       echo "Starting whaleon process..."
-      nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_4 --node-id $WHALEON_NODE_ID > nohup.out 2>&1 &
+      nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
 
       echo "Starting keep-alive script..."
       nohup bash ./alive.sh > keep_alive.out 2>&1 &
 
       echo "Starting log streamer..."
-      nohup python3 log_streamer.py --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
+      nohup python3 log_streamer.py --node-id $WHALEON_ID > log_streamer.out 2>&1 &
 
       echo "All background processes started successfully!"
     command: |
