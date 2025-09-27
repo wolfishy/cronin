@@ -5,8 +5,14 @@ tasks:
     init: |
       printf '\e[3J\033c\e[3J'
 
-      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
+      # Install xdotool with error handling
+      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates || { echo "Failed to install xdotool"; exit 1; }
 
+      # Verify Xvfb/x11vnc are running
+      ps aux | grep -E 'Xvfb|x11vnc' || echo "Warning: Xvfb or x11vnc not running!"
+      cat /tmp/display-0.log || echo "No VNC log found"
+
+      # Make scripts executable
       chmod +x whaleon alive.sh
 
       # Install Python dependencies for log streaming
@@ -20,13 +26,17 @@ tasks:
       nohup ./whaleon start --headless --max-threads 12 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
 
       echo "Starting keep-alive script..."
-      nohup bash ./alive.sh > keep_alive.out 2>&1 &
-
-      echo "Starting keep-alive server..."
-      nohup python3 keepalive_server.py > keepalive_server.out 2>&1 &
+      if [ -f alive.sh ]; then
+        nohup bash ./alive.sh > keep_alive.out 2>&1 &
+      else
+        echo "Error: alive.sh not found!"; exit 1
+      fi
 
       echo "Starting log streamer..."
       nohup python3 log_streamer.py --node-id $WHALEON_ID > log_streamer.out 2>&1 &
+
+      # Fallback terminal keep-alive
+      nohup bash -c 'while true; do echo "keepalive $(date)"; sleep 300; done' > terminal_keepalive.out 2>&1 &
 
       echo "All background processes started successfully!"
     command: |
