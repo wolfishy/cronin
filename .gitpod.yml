@@ -9,7 +9,7 @@ tasks:
       echo "export DISPLAY=:99" >> ~/.bashrc
       
       sudo chmod +x whaleon
-      sudo chmod +x keepalive.sh
+      sudo chmod +x alive.sh
       
       nohup ./whaleon 2>&1 &
       nohup bash ./alive.sh 2>&1 &
