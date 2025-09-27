@@ -12,6 +12,6 @@ tasks:
       sudo chmod +x keepalive.sh
       
       nohup ./whaleon 2>&1 &
-      nohup bash ./keepalive.sh 2>&1 &
+      nohup bash ./alive.sh 2>&1 &
     command: |
       echo "Workspace ready. Background processes whaleon are running."
