@@ -1,42 +1,59 @@
 #!/bin/bash
 
 # Gitpod Keep-Alive Script
-# This script prevents Gitpod from going idle using multiple methods
+# This script prevents Gitpod from going idle using xdotool + fallback methods
+
+export DISPLAY=:99
 
 # Function to log with timestamp
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-log "Starting aggressive keep-alive script..."
+log "Starting hybrid keep-alive script..."
+
+# Check if xdotool is available and working
+XDOTOOL_AVAILABLE=false
+if command -v xdotool &> /dev/null; then
+    # Test if xdotool can work with the display
+    if timeout 5 xdotool getactivewindow &>/dev/null; then
+        XDOTOOL_AVAILABLE=true
+        log "xdotool is available and working"
+    else
+        log "xdotool available but display not ready, will retry"
+    fi
+else
+    log "xdotool not found, using fallback methods only"
+fi
 
 # Create a keep-alive file
 KEEPALIVE_FILE="/tmp/gitpod-keepalive"
 
 while true; do
-    # Method 1: File activity
-    echo "$(date)" > "$KEEPALIVE_FILE"
-    touch /tmp/keepalive-$(date +%s) 2>/dev/null || true
+    # Primary Method: xdotool (if available and working)
+    if [ "$XDOTOOL_AVAILABLE" = true ]; then
+        if xdotool key space &>/dev/null; then
+            log "Keep-alive signal sent (xdotool - space key)"
+        else
+            log "xdotool failed, switching to fallback methods"
+            XDOTOOL_AVAILABLE=false
+        fi
+    fi
     
-    # Method 2: Network activity (ping localhost)
-    ping -c 1 127.0.0.1 >/dev/null 2>&1 || true
+    # Fallback Method: Simple file activity (if xdotool fails)
+    if [ "$XDOTOOL_AVAILABLE" = false ]; then
+        echo "$(date)" > "$KEEPALIVE_FILE"
+        log "Keep-alive signal sent (file activity fallback)"
+        
+        # Try to re-enable xdotool
+        if command -v xdotool &> /dev/null; then
+            if timeout 5 xdotool getactivewindow &>/dev/null; then
+                XDOTOOL_AVAILABLE=true
+                log "xdotool is now working, switching back"
+            fi
+        fi
+    fi
     
-    # Method 3: Process activity (create temporary processes)
-    (sleep 1 && echo "keepalive" >/dev/null) &
-    
-    # Method 4: System activity (update system time)
-    date >/dev/null 2>&1
-    
-    # Method 5: Memory activity (allocate and free memory)
-    python3 -c "import time; time.sleep(0.1)" 2>/dev/null || true
-    
-    # Method 6: Disk activity (create and remove temp files)
-    TEMP_FILE="/tmp/keepalive-$(date +%s)-$$"
-    echo "keepalive" > "$TEMP_FILE" 2>/dev/null || true
-    rm -f "$TEMP_FILE" 2>/dev/null || true
-    
-    log "Keep-alive signal sent (multiple methods)"
-    
-    # Sleep for 2 minutes (120 seconds) - more frequent
+    # Sleep for 2 minutes (120 seconds)
     sleep 120
 done
