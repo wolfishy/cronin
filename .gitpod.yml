@@ -3,29 +3,63 @@ image: gitpod/workspace-full-vnc
 tasks:
   - name: Setup & Run
     init: |
+      # Clear screen with fancy effect
       printf '\e[3J\033c\e[3J'
+      echo -e "\033[1;36m"
+      echo "╭──────────────────────────────────────────────────────────────╮"
+      echo "║                       NEXUS PROJECT                          ║"
+      echo "║              Gitpod Workspace Initialization                 ║"
+      echo "╰──────────────────────────────────────────────────────────────╯"
+      echo -e "\033[0m"
 
       # Install basic dependencies
-      sudo apt-get update -y && sudo apt-get install -y ca-certificates
+      echo -e "\033[1;33m[+] Installing system dependencies... [+]\033[0m"
+      sudo apt-get update -y && sudo apt-get install -y ca-certificates 2>&1 &
+      sleep 2
 
       # Make scripts executable
+      echo -e "\033[1;32m[+] Setting up executable permissions... [+]\033[0m"
       chmod +x whaleon
+      sleep 1
 
       # Install Python dependencies for log streaming
       if [ -f requirements.txt ]; then
-        echo "Installing Python dependencies..."
-        pip3 install -r requirements.txt
+        echo -e "\033[1;35m[+] Installing Python dependencies... [+]\033[0m"
+        pip3 install -r requirements.txt 2>&1 &
+        sleep 3
       fi
 
       # Start background processes with nohup
-      echo "Starting whaleon process..."
-      nohup ./whaleon start --headless --max-threads 12 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
+      echo -e "\033[1;34m"
+      echo "╭──────────────────────────────────────────────────────────────╮"
+      echo "║                     Starting Services                        ║"
+      echo "╰──────────────────────────────────────────────────────────────╯"
+      echo -e "\033[0m"
 
-      echo "Starting log streamer..."
-      nohup python3 log_streamer.py --node-id $WHALEON_ID > log_streamer.out 2>&1 &
+      echo -e "\033[1;31m[+] Starting whaleon mining process... [+]\033[0m"
+      nohup ./whaleon start --headless --max-threads 10 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
+      sleep 2
 
-      echo "All background processes started successfully!"
+      echo -e "\033[1;36m[+] Starting log monitor... [+]\033[0m"
+      nohup python3 log_monitor.py $WHALEON_ID > log_monitor.out 2>&1 &
+      sleep 2
+
+      echo -e "\033[1;32m"
+      echo "╭──────────────────────────────────────────────────────────────╮"
+      echo "║                          SUCCESS!                            ║"
+      echo "║              All background processes started!               ║"
+      echo "╰──────────────────────────────────────────────────────────────╯"
+      echo -e "\033[0m"
     command: |
-      echo "Workspace ready. Background processes (whaleon and log streamer) are running."
-      # Keep the terminal open
-      tail -f /dev/null
+      echo -e "\033[1;32m"
+      echo "╭──────────────────────────────────────────────────────────────╮"
+      echo "║                       WORKSPACE READY!                       ║"
+      echo "║                                                              ║"
+      echo "║  - whaleon mining process: RUNNING                           ║"
+      echo "║  - log monitor: RUNNING                                      ║"
+      echo "║                                                              ║"
+      echo "║  - Use './manage_services.sh status' to check processes      ║"
+      echo "║  - Use './manage_services.sh logs' to view logs              ║"
+      echo "╰──────────────────────────────────────────────────────────────╯"
+      echo -e "\033[0m"
+      echo -e "\033[1;36m[+] Your Nexus mining workspace is now active! [+]\033[0m"

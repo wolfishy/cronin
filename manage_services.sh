@@ -9,8 +9,8 @@ case "$1" in
         echo "=== Whaleon Process ==="
         pgrep -f "whaleon start" && echo "Running" || echo "Not running"
         echo ""
-        echo "=== Log Streamer Process ==="
-        pgrep -f "log_streamer.py" && echo "Running" || echo "Not running"
+        echo "=== Log Monitor Process ==="
+        pgrep -f "simple_log_monitor.py" && echo "Running" || echo "Not running"
         echo ""
         ;;
     logs)
@@ -18,38 +18,41 @@ case "$1" in
         echo "=== Whaleon Logs (nohup.out) ==="
         tail -20 nohup.out 2>/dev/null || echo "No whaleon logs found"
         echo ""
-        echo "=== Log Streamer Logs ==="
-        tail -20 log_streamer.out 2>/dev/null || echo "No log streamer logs found"
+        echo "=== Log Monitor Logs ==="
+        tail -20 log_monitor.out 2>/dev/null || echo "No log monitor logs found"
+        echo ""
+        echo "=== Latest Whaleon Output ==="
+        cat /tmp/latest_whaleon_output.txt 2>/dev/null || echo "No latest output saved yet"
         echo ""
         ;;
     restart-whaleon)
         echo "Restarting whaleon process..."
         pkill -f "whaleon start"
         sleep 2
-        nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_4 --node-id $WHALEON_NODE_ID > nohup.out 2>&1 &
+        nohup ./whaleon start --headless --max-threads 10 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
         echo "Whaleon restarted"
         ;;
-    restart-log-streamer)
-        echo "Restarting log streamer process..."
-        pkill -f "log_streamer.py"
+    restart-log-monitor)
+        echo "Restarting log monitor process..."
+        pkill -f "simple_log_monitor.py"
         sleep 2
-        nohup python3 log_streamer.py --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
-        echo "Log streamer restarted"
+        nohup python3 simple_log_monitor.py $WHALEON_ID > log_monitor.out 2>&1 &
+        echo "Log monitor restarted"
         ;;
         stop-all)
             echo "Stopping all processes..."
             pkill -f "whaleon start"
-            pkill -f "log_streamer.py"
+            pkill -f "simple_log_monitor.py"
             echo "All processes stopped"
             ;;
     *)
-        echo "Usage: $0 {status|logs|restart-whaleon|restart-log-streamer|stop-all}"
+        echo "Usage: $0 {status|logs|restart-whaleon|restart-log-monitor|stop-all}"
         echo ""
         echo "Commands:"
         echo "  status               - Show status of all processes"
         echo "  logs                 - Show recent logs from all processes"
         echo "  restart-whaleon      - Restart only the whaleon process"
-        echo "  restart-log-streamer - Restart only the log streamer process"
+        echo "  restart-log-monitor  - Restart only the log monitor process"
         echo "  stop-all             - Stop all processes"
         exit 1
         ;;
