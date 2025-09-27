@@ -262,7 +262,7 @@ async def main():
     # Set global configuration
     # Replace with your actual VPS IP and port
     VPS_IP = "143.198.192.51"
-    VPS_PORT = "8080"
+    VPS_PORT = "6969"
     WS_SERVER_URL = f"http://{VPS_IP}:{VPS_PORT}"
     WHALEON_NODE_ID = args.node_id
     RECONNECT_INTERVAL = args.reconnect_interval
