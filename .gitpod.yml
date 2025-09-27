@@ -5,14 +5,16 @@ tasks:
     init: |
       sudo apt-get update -y && sudo apt-get install -y xdotool xvfb ca-certificates
       
-      Xvfb :99 -screen 0 1024x768x16 &
       export DISPLAY=:99
       echo "export DISPLAY=:99" >> ~/.bashrc
+      chmod +x whaleon alive.sh
       
-      sudo chmod +x whaleon
-      sudo chmod +x alive.sh
-      
-      nohup ./whaleon 2>&1 &
-      nohup bash ./alive.sh 2>&1 &
+      nohup ./whaleon start --headless --max-threads 2 --max-difficulty extra_large_2 --node-id 2>&1 &
+      bash ./alive.sh 2>&1 &
     command: |
       echo "Workspace ready. Background processes whaleon are running."
+ports:
+    - name: ws
+      port: 6969
+      onOpen: ignore
+      visibility: public
