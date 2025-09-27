@@ -37,7 +37,7 @@ case "$1" in
         echo "Restarting log streamer process..."
         pkill -f "log_streamer.py"
         sleep 2
-        nohup python3 log_streamer.py --vps-ip $VPS_IP --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
+        nohup python3 log_streamer.py --node-id $WHALEON_NODE_ID > log_streamer.out 2>&1 &
         echo "Log streamer restarted"
         ;;
     restart-keep-alive)

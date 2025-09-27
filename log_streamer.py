@@ -242,10 +242,6 @@ class NohupOutputMonitor:
 def parse_arguments():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="Nexus Log Streamer")
-    parser.add_argument("--vps-ip", required=True, help="VPS server IP address")
-    parser.add_argument(
-        "--vps-port", default="8080", help="VPS server port (default: 8080)"
-    )
     parser.add_argument("--node-id", required=True, help="Whaleon node ID")
     parser.add_argument(
         "--reconnect-interval",
@@ -264,7 +260,10 @@ async def main():
     args = parse_arguments()
 
     # Set global configuration
-    WS_SERVER_URL = f"http://{args.vps_ip}:{args.vps_port}"
+    # Replace with your actual VPS IP and port
+    VPS_IP = "143.198.192.51"
+    VPS_PORT = "8080"
+    WS_SERVER_URL = f"http://{VPS_IP}:{VPS_PORT}"
     WHALEON_NODE_ID = args.node_id
     RECONNECT_INTERVAL = args.reconnect_interval
 
