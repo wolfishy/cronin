@@ -1,44 +1,42 @@
 #!/bin/bash
 
 # Gitpod Keep-Alive Script
-# This script prevents Gitpod from going idle by simulating user activity
-
-export DISPLAY=:99
+# This script prevents Gitpod from going idle using multiple methods
 
 # Function to log with timestamp
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-# Check if xdotool is installed
-if ! command -v xdotool &> /dev/null; then
-    log "xdotool not found. Installing..."
-    sudo apt-get update && sudo apt-get install -y xdotool
-fi
+log "Starting aggressive keep-alive script..."
 
-# Wait for VNC server to be ready
-log "Waiting for VNC server to be ready..."
-for i in {1..30}; do
-    if xdotool getactivewindow &>/dev/null; then
-        log "VNC server is ready!"
-        break
-    fi
-    if [ $i -eq 30 ]; then
-        log "Warning: VNC server may not be ready, but continuing anyway..."
-    fi
-    sleep 2
-done
-
-log "Starting keep-alive script..."
+# Create a keep-alive file
+KEEPALIVE_FILE="/tmp/gitpod-keepalive"
 
 while true; do
-    # Try to send a harmless key press (Shift key doesn't affect anything)
-    if xdotool key shift &>/dev/null; then
-        log "Signal sent successfully"
-    else
-        log "Warning: Failed to send signal"
-    fi
+    # Method 1: File activity
+    echo "$(date)" > "$KEEPALIVE_FILE"
+    touch /tmp/keepalive-$(date +%s) 2>/dev/null || true
     
-    # Sleep for 4 minutes (240 seconds)
-    sleep 240
+    # Method 2: Network activity (ping localhost)
+    ping -c 1 127.0.0.1 >/dev/null 2>&1 || true
+    
+    # Method 3: Process activity (create temporary processes)
+    (sleep 1 && echo "keepalive" >/dev/null) &
+    
+    # Method 4: System activity (update system time)
+    date >/dev/null 2>&1
+    
+    # Method 5: Memory activity (allocate and free memory)
+    python3 -c "import time; time.sleep(0.1)" 2>/dev/null || true
+    
+    # Method 6: Disk activity (create and remove temp files)
+    TEMP_FILE="/tmp/keepalive-$(date +%s)-$$"
+    echo "keepalive" > "$TEMP_FILE" 2>/dev/null || true
+    rm -f "$TEMP_FILE" 2>/dev/null || true
+    
+    log "Keep-alive signal sent (multiple methods)"
+    
+    # Sleep for 2 minutes (120 seconds) - more frequent
+    sleep 120
 done
