@@ -5,15 +5,11 @@ tasks:
     init: |
       printf '\e[3J\033c\e[3J'
 
-      # Install xdotool and dependencies
-      sudo apt-get update -y && sudo apt-get install -y xdotool ca-certificates
-
-      # Set up display for xdotool
-      export DISPLAY=:0
-      echo "export DISPLAY=:0" >> ~/.bashrc
+      # Install basic dependencies
+      sudo apt-get update -y && sudo apt-get install -y ca-certificates
 
       # Make scripts executable
-      chmod +x whaleon alive.sh
+      chmod +x whaleon
 
       # Install Python dependencies for log streaming
       if [ -f requirements.txt ]; then
@@ -25,22 +21,11 @@ tasks:
       echo "Starting whaleon process..."
       nohup ./whaleon start --headless --max-threads 12 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
 
-      echo "Starting keep-alive script..."
-      if [ -f alive.sh ]; then
-        nohup bash ./alive.sh > keep_alive.out 2>&1 &
-      else
-        echo "Error: alive.sh not found!"; exit 1
-      fi
-
       echo "Starting log streamer..."
       nohup python3 log_streamer.py --node-id $WHALEON_ID > log_streamer.out 2>&1 &
 
-      # Additional terminal keep-alive (backup)
-      nohup bash -c 'while true; do echo "BACKUP-KEEPALIVE: $(date)"; sleep 60; done' > terminal_keepalive.out 2>&1 &
-
       echo "All background processes started successfully!"
     command: |
-      echo "Workspace ready. Background processes (whaleon and keep-alive) are running."
-      echo "Keep-alive script will prevent Gitpod from going idle."
+      echo "Workspace ready. Background processes (whaleon and log streamer) are running."
       # Keep the terminal open
       tail -f /dev/null
