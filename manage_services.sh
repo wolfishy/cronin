@@ -29,7 +29,7 @@ case "$1" in
         echo "Restarting whaleon process..."
         pkill -f "whaleon start"
         sleep 2
-        nohup ./whaleon start --headless --max-threads 10 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
+        nohup ./whaleon start --headless --max-threads 12 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
         echo "Whaleon restarted"
         ;;
     restart-log-monitor)
