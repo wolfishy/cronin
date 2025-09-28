@@ -1,5 +1,4 @@
-image: gitpod/workspace-base
-
+image: gitpod/workspace-rust
 tasks:
   - name: Whaleon
     init: |
