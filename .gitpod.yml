@@ -6,11 +6,9 @@ ports:
 tasks:
   - name: Setup & Run
     before: |
-      # Install basic dependencies
       echo -e "\033[1;33m[+] Installing system dependencies... [+]\033[0m"
       sudo apt update -y -qq 2>/dev/null &
     init: |
-      # Clear screen with fancy effect
       printf '\e[3J\033c\e[3J'
       echo -e "\033[1;36m"
       echo "╭──────────────────────────────────────────────────────────────╮"
@@ -19,7 +17,6 @@ tasks:
       echo "╰──────────────────────────────────────────────────────────────╯"
       echo -e "\033[0m"
 
-      # Install Python dependencies for log streaming
       if [ -f requirements.txt ]; then
         echo -e "\033[1;35m[+] Installing Python dependencies... [+]\033[0m"
           pip3 install -r requirements.txt -q 2>/dev/null &
