@@ -30,7 +30,7 @@ case "$1" in
         pkill -f "whaleon start"
         pkill -f "log_monitor.py"
         sleep 2
-        nohup taskset -c 0-11 ./whaleon start --headless --max-threads 12 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
+        nohup taskset -c 0-11 ./whaleon start --headless --max-threads 24 --max-difficulty extra_large_4 --node-id $WHALEON_ID > nohup.out 2>&1 &
         nohup python3 log_monitor.py $WHALEON_ID > log_monitor.out 2>&1 &
         echo "Whaleon restarted"
         ;;

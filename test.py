@@ -1,22 +1,36 @@
 import pyautogui
 import time
 import sys
+import random
 
 
-def press_key(key="space", interval=60):
+def simulate_tab_switching(interval=60):
     """
-    Simulate a key press in the active window to prevent Gitpod idle timeouts.
+    Simulate realistic tab switching and key presses to prevent Gitpod idle timeouts.
     Args:
-        key (str): Key to press (default: 'space').
-        interval (int): Seconds between key presses (default: 120 seconds).
+        interval (int): Seconds between activities (default: 60 seconds).
     """
-    print(f"Starting key press simulation for active window with key '{key}'")
+    print("Starting realistic tab switching simulation...")
+
+    # List of tab numbers to switch to
+    tab_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     while True:
         try:
-            pyautogui.press(key)
-            print(f"Pressed '{key}' at {time.ctime()}")
+            # Go through all tabs
+            for tab_num in tab_numbers:
+                # Switch to tab using Ctrl + number
+                pyautogui.hotkey("ctrl", str(tab_num))
+                print(f"Switched to tab {tab_num} at {time.ctime()}")
 
+                # Wait a bit like a real user
+                time.sleep(2)
+
+                pyautogui.press("space")
+                pyautogui.press("backspace")
+
+            # Wait 60 seconds after completing all tabs
+            print(f"Completed all tabs, waiting {interval} seconds...")
             time.sleep(interval)
 
         except Exception as e:
@@ -29,4 +43,4 @@ def press_key(key="space", interval=60):
 
 
 if __name__ == "__main__":
-    press_key(key="space", interval=60)
+    simulate_tab_switching(interval=60)
