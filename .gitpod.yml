@@ -1,15 +1,6 @@
 image: gitpod/workspace-rust
 tasks:
   - name: Whaleon
-    init: |
-      printf '\e[3J\033c\e[3J'
-
-      # Install Python dependencies
-      # if [ -f requirements.txt ]; then
-      #   echo -e "\033[1;35m[+] Installing Python dependencies... [+]\033[0m"
-      #   pip3 install -r requirements.txt -q 2>/dev/null &
-      # fi
-
     command: |
       # Make scripts executable
       echo -e "\033[1;32m[+] Setting up executable permissions... [+]\033[0m"
