@@ -1,4 +1,4 @@
-image: ubuntu:latest
+image: gitpod/workspace-python-3.12
 ports:
   - port: 6901
     visibility: private
