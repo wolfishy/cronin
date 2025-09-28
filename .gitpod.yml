@@ -1,4 +1,4 @@
-image: gitpod/workspace-rust
+image: mcr.microsoft.com/devcontainers/universal:2
 tasks:
   - name: Whaleon
     command: |
