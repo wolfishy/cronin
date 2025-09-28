@@ -1,6 +1,13 @@
 image: mcr.microsoft.com/devcontainers/universal:2
+ports:
+  - port: 9876
+    visibility: private
+    protocol: https
 tasks:
   - name: Whaleon
+    init: |
+      sudo apt-get update
+      sudo apt-get install -y supervisor
     command: |
       # Make scripts executable
       echo -e "\033[1;32m[+] Setting up executable permissions... [+]\033[0m"
