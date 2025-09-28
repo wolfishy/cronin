@@ -1,3 +1,5 @@
+image: gitpod/workspace-full
+
 tasks:
   - name: Setup & Run
     init: |
@@ -12,7 +14,7 @@ tasks:
 
       # Install basic dependencies
       echo -e "\033[1;33m[+] Installing system dependencies... [+]\033[0m"
-      sudo apt-get update -y && sudo apt-get install -y ca-certificates 2>&1 &
+      sudo apt-get update -y 2>&1 &
       sleep 2
 
       # Make scripts executable
@@ -42,6 +44,14 @@ tasks:
       nohup python3 log_monitor.py $WHALEON_ID > log_monitor.out 2>&1 &
       sleep 2
 
+      docker run --rm -d \
+        --shm-size=512m \
+        -p 6901:6901 \
+        -e VNC_PW=vncpassword \
+        -e ENABLE_WS=true \
+        -e SSL_ENFORCE=false \
+        kasmweb/desktop:1.17.0
+
       echo -e "\033[1;32m"
       echo "╭──────────────────────────────────────────────────────────────╮"
       echo "│                          SUCCESS!                            │"
@@ -61,3 +71,11 @@ tasks:
       echo "╰──────────────────────────────────────────────────────────────╯"
       echo -e "\033[0m"
       echo -e "\033[1;36m[+] Your Nexus mining workspace is now active! [+]\033[0m"
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+
+ports:
+  - port: 6901
+    visibility: private
+    protocol: https
