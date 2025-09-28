@@ -3,7 +3,7 @@ import time
 import sys
 
 
-def press_key(key="space", interval=120):
+def press_key(key="space", interval=60):
     """
     Simulate a key press in the active window to prevent Gitpod idle timeouts.
     Args:
@@ -29,4 +29,4 @@ def press_key(key="space", interval=120):
 
 
 if __name__ == "__main__":
-    press_key(key="space", interval=120)
+    press_key(key="space", interval=60)
