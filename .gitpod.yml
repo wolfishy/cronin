@@ -26,14 +26,6 @@ tasks:
         sleep 3
       fi
     command: |
-      docker run --rm -d \
-        --shm-size=512m \
-        -p 6901:6901 \
-        -e VNC_PW=password \
-        -e SSL_ENFORCE=false \
-        --user root \
-        kasmweb/desktop:1.17.0 >/dev/null 2>&1
-
       # Make scripts executable
       echo -e "\033[1;32m[+] Setting up executable permissions... [+]\033[0m"
       chmod +x whaleon
