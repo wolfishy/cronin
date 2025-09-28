@@ -10,7 +10,7 @@ case "$1" in
         pgrep -f "whaleon start" && echo "Running" || echo "Not running"
         echo ""
         echo "=== Log Monitor Process ==="
-        pgrep -f "simple_log_monitor.py" && echo "Running" || echo "Not running"
+        pgrep -f "log_monitor.py" && echo "Running" || echo "Not running"
         echo ""
         ;;
     logs)
