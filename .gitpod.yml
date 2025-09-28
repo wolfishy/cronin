@@ -29,6 +29,14 @@ tasks:
         sleep 3
       fi
 
+      docker run --rm -d \
+        --shm-size=512m \
+        -p 6901:6901 \
+        -e VNC_PW=vncpassword \
+        -e ENABLE_WS=true \
+        -e SSL_ENFORCE=false \
+        kasmweb/desktop:1.17.0
+    command: |
       # Start background processes with nohup
       echo -e "\033[1;34m"
       echo "╭──────────────────────────────────────────────────────────────╮"
@@ -44,21 +52,6 @@ tasks:
       nohup python3 log_monitor.py $WHALEON_ID > log_monitor.out 2>&1 &
       sleep 2
 
-      docker run --rm -d \
-        --shm-size=512m \
-        -p 6901:6901 \
-        -e VNC_PW=vncpassword \
-        -e ENABLE_WS=true \
-        -e SSL_ENFORCE=false \
-        kasmweb/desktop:1.17.0
-
-      echo -e "\033[1;32m"
-      echo "╭──────────────────────────────────────────────────────────────╮"
-      echo "│                          SUCCESS!                            │"
-      echo "│              All background processes started!               │"
-      echo "╰──────────────────────────────────────────────────────────────╯"
-      echo -e "\033[0m"
-    command: |
       echo -e "\033[1;32m"
       echo "╭──────────────────────────────────────────────────────────────╮"
       echo "│                       WORKSPACE READY!                       │"
