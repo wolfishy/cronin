@@ -2,14 +2,10 @@ image: mcr.microsoft.com/devcontainers/universal:2
 ports:
   - port: 9876
     visibility: private
-    protocol: https
+    protocol: http
+
 tasks:
   - name: Whaleon
     init: |
       sudo apt-get update
       sudo apt-get install -y supervisor
-      sudo supervisord -c /etc/supervisor/supervisord.conf
-
-    command: |
-      echo 'WHALEON_ID=$WHALEON_ID' | sudo tee -a /etc/environment
-      source /etc/environment
