@@ -8,22 +8,8 @@ tasks:
     init: |
       sudo apt-get update
       sudo apt-get install -y supervisor
-    command: |
-      # Make scripts executable
-      echo -e "\033[1;32m[+] Setting up executable permissions... [+]\033[0m"
-      chmod +x whaleon
-      sleep 1
+      sudo supervisord -c /etc/supervisor/supervisord.conf
 
-      echo -e "\033[1;32m"
-      echo "╭──────────────────────────────────────────────────────────────╮"
-      echo "│                       WORKSPACE READY!                       │"
-      echo "│                                                              │"
-      echo "│  - whaleon mining process: RUNNING                           │"
-      echo "│  - log monitor: RUNNING                                      │"
-      echo "│                                                              │"
-      echo "│  - run './manage_services.sh restart' to start the node,     │"
-      echo "│  - run './manage_services.sh status' to check processes      │"
-      echo "│  - run './manage_services.sh logs' to view logs              │"
-      echo "╰──────────────────────────────────────────────────────────────╯"
-      echo -e "\033[0m"
-      echo -e "\033[1;36m[+] Your Nexus mining workspace is now active! [+]\033[0m"
+    command: |
+      echo 'WHALEON_ID=$WHALEON_ID' | sudo tee -a /etc/environment
+      source /etc/environment
