@@ -2,7 +2,7 @@ image: mcr.microsoft.com/devcontainers/universal:2
 ports:
   - port: 9876
     visibility: private
-    protocol: http
+    protocol: https
 
 tasks:
   - name: Whaleon
