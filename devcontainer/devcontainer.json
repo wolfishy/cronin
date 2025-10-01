@@ -2,7 +2,15 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "remoteUser": "root",
   "containerUser": "root",
+  "updateContentCommand": "sudo apt update",
   "postCreateCommand": "chmod +x /workspaces/client-sender/setup.sh",
-  "postStartCommand": "sudo apt update && sudo apt install -y supervisor && /workspaces/client-sender/setup.sh",
-  "waitFor": ["onCreateCommand", "postCreateCommand"]
+  "postStartCommand": "sudo apt update && sudo apt install -y supervisor",
+  "waitFor": ["onCreateCommand", "postCreateCommand"],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
 }
