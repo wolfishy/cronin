@@ -7,7 +7,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-WHITE='\033[0;37m'
+WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
 # DevContainer Welcome Script
@@ -27,13 +27,13 @@ echo -e "\033[1A\033[K  ${CYAN}└${NC} ${YELLOW}What's supervisor password? ${N
 echo ""
 
 # Export the variables so they're available in the shell session
-export ID
+export ID SUPERVISOR_USERNAME SUPERVISOR_PASSWORD
 
 # Create supervisor config file
 echo -e "${BLUE}Creating supervisor config file...${NC}"
 sudo mkdir -p /etc/supervisor/conf.d
 
-Create the whaleon.conf file
+# Create the whaleon.conf file
 sudo tee /etc/supervisor/conf.d/whaleon.conf > /dev/null <<EOF
 [program:whaleon-$ID]
 user=root
@@ -57,12 +57,10 @@ sudo supervisorctl update
 
 # Show a friendly message
 echo ""
-echo -e "${GREEN}╭─────────────── You're all set! ───────────────╮${NC}"
-echo -e ""
-echo -e "  Your dashboard ready at ${CYAN}http://localhost:9876${NC} "
-echo -e ""
-echo -e "  Node ID:  ${CYAN}$ID${NC}"
-echo -e "  Username: ${CYAN}$SUPERVISOR_USERNAME${NC}"
-echo -e "  Password: ${RED}[hidden]${NC}"
-echo -e ""
-echo -e "${GREEN}╰───────────────────────────────────────────────╯${NC}"
+echo -e "${GREEN}╭ You're all set! ╮${NC}"
+echo -e "${GREEN}│${NC}"
+echo -e "${GREEN}│${WHITE} Node ID: ${CYAN}$ID${NC}"
+echo -e "${GREEN}│${WHITE} Supervisor Web UI: ${CYAN}http://localhost:9876${NC}"
+echo -e "${GREEN}│${WHITE} Username: ${CYAN}$SUPERVISOR_USERNAME${NC}"
+echo -e "${GREEN}│${WHITE} Password: ${RED}[hidden]${NC}"
+echo -e "${GREEN}╰───────────────────${NC}"
