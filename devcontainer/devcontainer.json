@@ -2,9 +2,7 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "remoteUser": "root",
   "containerUser": "root",
-  "updateContentCommand": "sudo apt update",
-  "postCreateCommand": "sudo chmod +x setup.sh",
-  "postAttachCommand": "sudo apt update && sudo apt install -y supervisor",
+  "postAttachCommand": ["echo", "foo='bar'"],
   "customizations": {
     "vscode": {
       "settings": {
