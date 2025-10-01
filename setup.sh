@@ -17,13 +17,13 @@ echo -e "${CYAN}╰┬───────────────────�
 echo -e " ${CYAN}│${NC}"
 echo -e -n " ${CYAN}└${NC} ${YELLOW}What's node id? ${NC}"
 read ID
-echo -e "\033[1A\033[K  ${CYAN}├${NC} ${YELLOW}What's node id? ${NC}${CYAN}$ID${NC}"
+echo -e "\033[1A\033[K ${CYAN}├${NC} ${YELLOW}What's node id? ${NC}${CYAN}$ID${NC}"
 echo -e -n " ${CYAN}└${NC} ${YELLOW}What's supervisor username? ${NC}"
 read SUPERVISOR_USERNAME
-echo -e "\033[1A\033[K  ${CYAN}├${NC} ${YELLOW}What's supervisor username? ${NC}${CYAN}$SUPERVISOR_USERNAME${NC}"
+echo -e "\033[1A\033[K ${CYAN}├${NC} ${YELLOW}What's supervisor username? ${NC}${CYAN}$SUPERVISOR_USERNAME${NC}"
 echo -e -n " ${CYAN}└${NC} ${YELLOW}What's supervisor password? ${NC}"
 read -s SUPERVISOR_PASSWORD
-echo -e "\033[1A\033[K  ${CYAN}└${NC} ${YELLOW}What's supervisor password? ${NC}${RED}[hidden]${NC}"
+echo -e "\033[1A\033[K ${CYAN}└${NC} ${YELLOW}What's supervisor password? ${NC}${RED}[hidden]${NC}"
 echo ""
 
 # Export the variables so they're available in the shell session
