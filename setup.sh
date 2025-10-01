@@ -52,14 +52,15 @@ username=$SUPERVISOR_USERNAME
 password=$SUPERVISOR_PASSWORD
 EOF
 
+echo ""
 echo -e "${BLUE}Starting supervisor configuration...${NC}"
 sudo supervisord -c /etc/supervisor/supervisord.conf
 
 echo ""
-echo -e "${GREEN}╭ You're all set! ╮${NC}"
+echo -e "${GREEN}╭─ ✓ You're all set! ${NC}"
 echo -e "${GREEN}│${NC}"
 echo -e "${GREEN}│${WHITE} Node ID: ${CYAN}$ID${NC}"
-echo -e "${GREEN}│${WHITE} Supervisor Web UI: ${CYAN}http://localhost:9876${NC}"
+echo -e "${GREEN}│${WHITE} Dashboard: ${CYAN}http://localhost:9876${NC}"
 echo -e "${GREEN}│${WHITE} Username: ${CYAN}$SUPERVISOR_USERNAME${NC}"
 echo -e "${GREEN}│${WHITE} Password: ${RED}[hidden]${NC}"
 echo -e "${GREEN}╰───────────────────${NC}"
