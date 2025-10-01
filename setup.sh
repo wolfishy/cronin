@@ -10,6 +10,12 @@ CYAN='\033[0;36m'
 WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
+# Update the system
+sudo apt update >/dev/null 2>&1
+
+# Install supervisor
+sudo apt install -y supervisor >/dev/null 2>&1
+
 # DevContainer Welcome Script
 echo -e "${CYAN}╭───────────────────────────────╮${NC}"
 echo -e "${CYAN}│${WHITE}        Nexus Node Setup       ${CYAN}│${NC}"
