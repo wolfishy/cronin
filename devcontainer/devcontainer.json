@@ -2,12 +2,5 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "remoteUser": "root",
   "containerUser": "root",
-  "postAttachCommand": ["echo", "foo='bar'"],
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
-      }
-    }
-  }
+  "postAttachCommand": "sudo chmod +x setup.sh"
 }
