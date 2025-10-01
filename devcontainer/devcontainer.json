@@ -3,9 +3,8 @@
   "remoteUser": "root",
   "containerUser": "root",
   "updateContentCommand": "sudo apt update",
-  "postCreateCommand": "chmod +x /workspaces/client-sender/setup.sh",
-  "postStartCommand": "sudo apt update && sudo apt install -y supervisor",
-  "waitFor": ["onCreateCommand", "postCreateCommand"],
+  "postCreateCommand": "sudo chmod +x setup.sh",
+  "postAttachCommand": "sudo apt update && sudo apt install -y supervisor",
   "customizations": {
     "vscode": {
       "settings": {
