@@ -2,5 +2,6 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "remoteUser": "root",
   "containerUser": "root",
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y supervisor && chmod +x /workspaces/client-sender/start.sh && sudo chmod +x /workspaces/cronin/setup.sh && /workspaces/cronin/setup.sh"
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y supervisor && chmod +x /workspaces/client-sender/setup.sh",
+  "postStartCommand": "/workspaces/client-sender/setup.sh"
 }
