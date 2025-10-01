@@ -29,10 +29,6 @@ echo ""
 # Export the variables so they're available in the shell session
 export ID SUPERVISOR_USERNAME SUPERVISOR_PASSWORD
 
-# Create supervisor config file
-echo -e "${BLUE}Creating supervisor config file...${NC}"
-sudo mkdir -p /etc/supervisor/conf.d
-
 # Create the whaleon.conf file
 sudo tee /etc/supervisor/conf.d/whaleon.conf > /dev/null <<EOF
 [program:whaleon-$ID]
@@ -50,12 +46,9 @@ username=$SUPERVISOR_USERNAME
 password=$SUPERVISOR_PASSWORD
 EOF
 
-# Reload supervisor configuration
-echo -e "${BLUE}Reloading supervisor configuration...${NC}"
-sudo supervisorctl reread
-sudo supervisorctl update
+echo -e "${BLUE}Starting supervisor configuration...${NC}"
+sudo supervisord -c /etc/supervisor/supervisord.conf
 
-# Show a friendly message
 echo ""
 echo -e "${GREEN}╭ You're all set! ╮${NC}"
 echo -e "${GREEN}│${NC}"
